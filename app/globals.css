@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fedbb6;
+  --foreground: #2b2b2b;
+  --muted: #6b6b6b;
+  --card: #e8e1d9;
+  --brand: #6faf9f;
+  --brand-dark: #5f9c8d;
+  --brand-soft: #d9e8e2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-soft: var(--brand-soft);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(111, 175, 159, 0.28);
+}
+
+/* Premium hero signature animation for the Pet2Home wordmark. */
+.pet2home-signature-wrap {
+  position: relative;
+}
+
+.pet2home-signature-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(86vw, 680px);
+  height: clamp(64px, 9vw, 96px);
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 12%,
+    rgba(255, 255, 255, 0.36) 46%,
+    rgba(255, 255, 255, 0) 76%
+  );
+  filter: blur(1.5px);
+  transform: translateX(-58%);
+  opacity: 0;
+  pointer-events: none;
+  animation: signatureSweep 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.pet2home-signature text {
+  font-family:
+    "Snell Roundhand",
+    "Brush Script MT",
+    "Segoe Script",
+    "Lucida Handwriting",
+    cursive;
+  font-size: 126px;
+  letter-spacing: 0.01em;
+}
+
+.pet2home-signature {
+  --signature-write-duration: 5s;
+}
+
+.pet2home-signature__stroke {
+  fill: transparent;
+  stroke: #7b6a5d;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  opacity: 0.68;
+  filter: drop-shadow(0 0 5px rgba(123, 106, 93, 0.12));
+  animation: signatureWrite var(--signature-write-duration) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.pet2home-signature__fill {
+  fill: url(#pet2home-signature-fill);
+  opacity: 0;
+  filter: blur(0);
+  animation: none;
+}
+
+@keyframes signatureWrite {
+  0% {
+    stroke-dashoffset: 1600;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes signatureFill {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes signatureSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-58%);
+  }
+  28% {
+    opacity: 0.42;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(58%);
+  }
+}
+
+@media (max-width: 768px) {
+  .pet2home-signature text {
+    font-size: 96px;
+  }
+}
